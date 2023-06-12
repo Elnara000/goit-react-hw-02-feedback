@@ -11,5 +11,6 @@ export default Section;
 
 Section.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.object),
+  // children: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.node,
 };

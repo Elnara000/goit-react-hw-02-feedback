@@ -11,21 +11,10 @@ class App extends Component {
     bad: 0,
   };
 
-  onLeaveFeedback = e => {
-    const btnName = e.currentTarget.textContent.toLowerCase();
-    if (btnName === 'good') {
-      this.setState(prevState => ({
-        good: prevState.good + 1,
-      }));
-    } else if (btnName === 'neutral') {
-      this.setState(prevState => ({
-        neutral: prevState.neutral + 1,
-      }));
-    } else if (btnName === 'bad') {
-      this.setState(prevState => ({
-        bad: prevState.bad + 1,
-      }));
-    }
+  onLeaveFeedback = feedback => {
+    this.setState(prevState => ({
+      [feedback]: prevState[feedback] + 1,
+    }));
   };
 
   countTotalFeedback = () => {
@@ -43,13 +32,16 @@ class App extends Component {
     return (
       <>
         <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
+          <FeedbackOptions
+            onLeaveFeedback={this.onLeaveFeedback}
+            options={['good', 'bad', 'neutral']}
+          />
           <Statistics
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
+            total={this.countTotalFeedback}
+            positivePercentage={this.countPositiveFeedbackPercentage}
           />
         </Section>
       </>
